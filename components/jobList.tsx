@@ -1,15 +1,28 @@
 import React from 'react';
-import {View} from 'react-native';
+import {View, FlatList} from 'react-native';
 import Job from './job';
-import {getJobs, getCategories} from '../api';
+
+const testJob = {
+  id: '123',
+  url: '',
+  title: 'Test Job',
+  companyName: 'Test Company',
+  category: 'Software Engineer',
+  jobType: 'Remote',
+  candidateRequiredLocation: 'Toronto',
+  salary: '$100000',
+  description: 'This is a test job',
+};
 
 const JobList = () => {
-  const jobs = [];
+  const jobs = [testJob];
   return (
     <View>
-      {jobs.forEach((job) => {
-        <Job job={job}></Job>;
-      })}
+      <FlatList
+        data={jobs}
+        keyExtractor={(item) => item.id}
+        renderItem={({item}) => <Job job={item}></Job>}
+      />
     </View>
   );
 };

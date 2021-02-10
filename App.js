@@ -26,6 +26,7 @@ import {
 
 import Job from './components/job.tsx';
 import JobList from './components/jobList.tsx';
+import JobSearchPage from './components/jobSearchPage';
 
 const App: () => React$Node = () => {
   return (
@@ -41,10 +42,10 @@ const App: () => React$Node = () => {
               <Text style={styles.footer}>Engine: Hermes</Text>
             </View>
           )}
-          <View style={styles.body}>
-            <JobList />
-          </View>
         </ScrollView>
+        <View style={styles.body}>
+          <JobSearchPage />
+        </View>
       </SafeAreaView>
     </>
   );
