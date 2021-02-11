@@ -1,5 +1,6 @@
 import React from 'react';
-import {View, Text, Image, StyleSheet} from 'react-native';
+import {View, Text, Image, StyleSheet, Dimensions} from 'react-native';
+import useWindowDimensions from 'react-native/Libraries/Utilities/useWindowDimensions';
 
 const Job = (props) => {
   const {
@@ -13,15 +14,10 @@ const Job = (props) => {
     salary,
     description,
     company_logo_url: companyLogoUrl,
+    publication_date: publicationDate,
+    tags,
   } = props.job;
-  console.log(
-    title,
-    companyName,
-    candidateRequiredLocation,
-    salary,
-    jobType,
-    companyLogoUrl,
-  );
+  console.log(props.job);
 
   const hr = <View style={styles.hr} />;
   return (
@@ -50,7 +46,6 @@ const Job = (props) => {
 
 const styles = StyleSheet.create({
   jobContainer: {
-    maxWidth: '100%',
     padding: 10,
   },
   hr: {

@@ -18,11 +18,13 @@ const JobList = (props) => {
   const jobs = props && props.jobs ? props.jobs : [];
   return (
     <View>
-      <FlatList
-        data={jobs}
-        keyExtractor={(item) => item.id}
-        renderItem={({item}) => <Job job={item}></Job>}
-      />
+      {jobs && (
+        <FlatList
+          data={jobs}
+          keyExtractor={(item) => item.id}
+          renderItem={({item}) => <Job job={item}></Job>}
+        />
+      )}
     </View>
   );
 };
