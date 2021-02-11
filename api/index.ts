@@ -18,8 +18,7 @@ export const getJobs = (category, companyName, search, limit) => {
   )
     .then((response) => response.json())
     .then((json) => {
-      console.log('fetched', json);
-      return json;
+      return json.jobs;
     })
     .catch((e) => console.error(e));
 };

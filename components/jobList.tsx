@@ -14,8 +14,8 @@ const testJob = {
   description: 'This is a test job',
 };
 
-const JobList = () => {
-  const jobs = [testJob];
+const JobList = (props) => {
+  const jobs = props && props.jobs ? props.jobs : [];
   return (
     <View>
       <FlatList

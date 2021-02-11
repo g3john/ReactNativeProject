@@ -1,33 +1,47 @@
 import React from 'react';
-import {View, Text, StyleSheet} from 'react-native';
+import {View, Text, Image, StyleSheet} from 'react-native';
 
 const Job = (props) => {
   const {
     id,
     url,
     title,
-    companyName,
+    company_name: companyName,
     category,
-    jobType,
-    candidateRequiredLocation,
+    job_type: jobType,
+    candidate_required_location: candidateRequiredLocation,
     salary,
     description,
+    company_logo_url: companyLogoUrl,
   } = props.job;
-  console.log('job here', props);
+  console.log(
+    title,
+    companyName,
+    candidateRequiredLocation,
+    salary,
+    jobType,
+    companyLogoUrl,
+  );
 
   const hr = <View style={styles.hr} />;
   return (
     <View>
       {hr}
-      <View style={styles.jobContainer}>
-        <Text style={styles.jobTitle}>{title}</Text>
-        <View style={styles.row}>
-          <Text>{companyName}</Text>
-          {salary && <Text style={styles.rightColumn}>{salary}</Text>}
+      <View style={[styles.jobContainer, styles.row]}>
+        <View style={styles.logo}>
+          {companyLogoUrl && (
+            <Image
+              style={styles.logo}
+              source={{
+                uri: companyLogoUrl,
+              }}
+            />
+          )}
         </View>
-        <View style={styles.row}>
+        <View>
+          <Text style={styles.jobTitle}>{title}</Text>
+          <Text>{companyName}</Text>
           <Text>{candidateRequiredLocation}</Text>
-          {jobType && <Text style={styles.rightColumn}>{jobType}</Text>}
         </View>
       </View>
     </View>
@@ -44,15 +58,15 @@ const styles = StyleSheet.create({
   },
   jobTitle: {
     fontWeight: 'bold',
-    fontSize: 18,
+    fontSize: 16,
   },
   row: {
     flexDirection: 'row',
-    width: '100%',
-    justifyContent: 'space-between',
   },
-  rightColumn: {
-    alignSelf: 'flex-end',
+  logo: {
+    width: 50,
+    height: 50,
+    marginRight: 10,
   },
 });
 
