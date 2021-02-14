@@ -23,7 +23,7 @@ const Job = (props) => {
   return (
     <View>
       {hr}
-      <View style={[styles.jobContainer, styles.row]}>
+      <View style={styles.jobContainer}>
         <View style={styles.logo}>
           {companyLogoUrl && (
             <Image
@@ -47,6 +47,7 @@ const Job = (props) => {
 const styles = StyleSheet.create({
   jobContainer: {
     padding: 10,
+    flexDirection: 'row',
   },
   hr: {
     borderBottomWidth: StyleSheet.hairlineWidth,
@@ -54,13 +55,11 @@ const styles = StyleSheet.create({
   jobTitle: {
     fontWeight: 'bold',
     fontSize: 16,
-  },
-  row: {
-    flexDirection: 'row',
+    width: Dimensions.get('window').width * 0.75,
   },
   logo: {
-    width: 50,
-    height: 50,
+    width: Dimensions.get('window').width * 0.15,
+    height: Dimensions.get('window').width * 0.15,
     marginRight: 10,
   },
 });
