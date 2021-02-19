@@ -1,6 +1,5 @@
 import React from 'react';
 import {View, Text, Image, StyleSheet, Dimensions} from 'react-native';
-import useWindowDimensions from 'react-native/Libraries/Utilities/useWindowDimensions';
 
 const Job = (props) => {
   const {
@@ -17,7 +16,6 @@ const Job = (props) => {
     publication_date: publicationDate,
     tags,
   } = props.job;
-  console.log(props.job);
 
   const hr = <View style={styles.hr} />;
   return (
