@@ -1,9 +1,8 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, Text } from 'react-native';
 import { Picker } from '@react-native-picker/picker';
 
 const FilterBar = (props) => {
-  const [expanded, setExpanded] = useState(false);
   const [selected, setSelected] = useState(null);
   const setCategory = (selected) => {
     setSelected(selected);
@@ -11,7 +10,9 @@ const FilterBar = (props) => {
   };
   const filtersSet = props.filtersSet;
   const categories = props.categories;
-  categories.unshift({ id: -1, name: 'All', slug: null });
+  if (categories && categories[0] && categories[0].id !== -1) {
+    categories.unshift({ id: -1, name: 'All', slug: null });
+  }
   return (
     <View>
       <Picker
