@@ -4,22 +4,24 @@
  */
 
 import React from 'react';
-import {SafeAreaView, StyleSheet, View, StatusBar} from 'react-native';
+import { SafeAreaView, StyleSheet, View, StatusBar } from 'react-native';
+import { Provider } from 'react-redux';
+import store from './store';
 
-import {Colors} from 'react-native/Libraries/NewAppScreen';
+import { Colors } from 'react-native/Libraries/NewAppScreen';
 
 import JobSearchPage from './components/jobSearchPage';
 
 const App: () => React$Node = () => {
   return (
-    <>
+    <Provider store={store}>
       <StatusBar barStyle="dark-content" />
       <SafeAreaView>
         <View style={styles.body}>
           <JobSearchPage />
         </View>
       </SafeAreaView>
-    </>
+    </Provider>
   );
 };
 

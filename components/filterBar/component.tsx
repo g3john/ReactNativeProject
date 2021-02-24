@@ -1,6 +1,6 @@
-import React, {useState} from 'react';
-import {View, Text} from 'react-native';
-import {Picker} from '@react-native-picker/picker';
+import React, { useState } from 'react';
+import { View, Text } from 'react-native';
+import { Picker } from '@react-native-picker/picker';
 
 const FilterBar = (props) => {
   const [expanded, setExpanded] = useState(false);
@@ -11,16 +11,13 @@ const FilterBar = (props) => {
   };
   const filtersSet = props.filtersSet;
   const categories = props.categories;
-  categories.unshift({id: -1, name: 'All', slug: null});
+  categories.unshift({ id: -1, name: 'All', slug: null });
   return (
     <View>
       <Picker
         selectedValue={selected}
         onValueChange={(itemValue) => setCategory(itemValue)}>
         {categories.map((category) => {
-          {
-            // console.log("here's a category", category);
-          }
           return (
             <Picker.Item
               key={'category ' + category.id}

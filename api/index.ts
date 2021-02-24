@@ -5,7 +5,6 @@ export const getJobs = (category, companyName, search, limit) => {
     : '';
   const searchStr = search ? '&search=' + encodeURIComponent(search) : '';
   const limitStr = limit ? '&limit=' + limit : '';
-  // console.log('GET JOBS', categoryStr, companyNameStr, searchStr, limitStr);
   return fetch(
     'https://remotive.io/api/remote-jobs?' +
       categoryStr +

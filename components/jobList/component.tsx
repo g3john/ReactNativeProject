@@ -1,6 +1,6 @@
-import React, {useRef, useEffect, forwardRef} from 'react';
-import {View, FlatList} from 'react-native';
-import Job from './job';
+import React, { forwardRef } from 'react';
+import { View, FlatList } from 'react-native';
+import Job from '../job';
 
 const testJob = {
   id: '123',
@@ -14,7 +14,7 @@ const testJob = {
   description: 'This is a test job',
 };
 
-const JobList = React.forwardRef((props, ref) => {
+const JobList = forwardRef((props, ref) => {
   const jobs = props && props.jobs ? props.jobs : [];
 
   return (
@@ -24,7 +24,7 @@ const JobList = React.forwardRef((props, ref) => {
           ref={ref}
           data={jobs}
           keyExtractor={(item) => item.id.toString()}
-          renderItem={({item}) => <Job job={item}></Job>}
+          renderItem={({ item }) => <Job job={item}></Job>}
         />
       )}
     </View>
