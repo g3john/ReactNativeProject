@@ -5,30 +5,30 @@ import JobList from '../jobList';
 import { getJobs, getCategories } from '../../api';
 
 const JobSearchPage = (props) => {
-  const { jobs, loadJobs } = props;
+  const { jobs, loadJobs, navigation } = props;
   const [filters, setFilters] = useState({
-    category: null,
+    category: 'Software Development',
     company: null,
     search: null,
   });
   const [categories, setCategories] = useState([]);
   const flatListRef = useRef(null);
   const filtersSet = (category, company, search) => {
-    getJobs(category, company, search, 10).then((res) => {
+    getJobs(category, company, search, null).then((res) => {
       loadJobs(res);
       flatListRef.current.scrollToIndex({ animated: true, index: 0 });
     });
   };
 
   useEffect(() => {
-    getJobs(filters.category, filters.company, filters.search, 10).then(
+    getCategories().then((res) => {
+      setCategories(res ? res : []);
+    });
+    getJobs(filters.category, filters.company, filters.search, null).then(
       (res) => {
         loadJobs(res);
       },
     );
-    getCategories().then((res) => {
-      setCategories(res ? res : []);
-    });
   }, []);
 
   return (
@@ -41,7 +41,7 @@ const JobSearchPage = (props) => {
         <FilterBar filtersSet={filtersSet} categories={categories} />
       </View>
       <View style={{ height: Dimensions.get('window').height * 0.8 }}>
-        <JobList ref={flatListRef} jobs={jobs} />
+        <JobList ref={flatListRef} jobs={jobs} navigation={navigation} />
       </View>
       <View
         style={[

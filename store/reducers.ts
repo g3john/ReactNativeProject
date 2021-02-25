@@ -2,7 +2,7 @@ import { ACTIONS } from './actions';
 
 const initialState = {
   loadedJobs: [],
-  starredJobs: [],
+  savedJobs: [],
 };
 
 export default function (state = initialState, action) {
@@ -13,16 +13,16 @@ export default function (state = initialState, action) {
         loadedJobs: action.payload.jobs,
       };
     }
-    case ACTIONS.STAR_JOB: {
+    case ACTIONS.SAVE_JOB: {
       return {
         ...state,
-        starredJobs: [...state.starredJobs, action.payload.job],
+        savedJobs: [...state.savedJobs, action.payload.job],
       };
     }
     case ACTIONS.REMOVE_JOB: {
       return {
         ...state,
-        starredJobs: state.starredJobs.filter((job) => {
+        savedJobs: state.savedJobs.filter((job) => {
           job.id !== action.payload.jobId;
         }),
       };

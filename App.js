@@ -2,7 +2,7 @@
  * @format
  * @flow strict-local
  */
-
+import 'react-native-gesture-handler';
 import React from 'react';
 import {
   SafeAreaView,
@@ -14,6 +14,7 @@ import {
 import { Provider } from 'react-redux';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { createStackNavigator } from '@react-navigation/stack';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
 import store from './store';
@@ -21,24 +22,41 @@ import store from './store';
 import { Colors } from 'react-native/Libraries/NewAppScreen';
 
 import JobSearchPage from './components/jobSearchPage';
+import SavedPage from './components/savedPage';
+import JobPage from './components/jobPage';
+
+const Tab = createBottomTabNavigator();
+const Stack = createStackNavigator();
 
 const JobSearch = () => {
   return (
-    <SafeAreaView style={styles.body}>
-      <JobSearchPage />
-    </SafeAreaView>
+    <Stack.Navigator>
+      <Stack.Screen
+        name="JobSearchPage"
+        component={JobSearchPage}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="JobPage"
+        component={JobPage}
+        options={{ title: '' }}
+      />
+    </Stack.Navigator>
   );
 };
 
-const Favourites = () => {
+const Saved = () => {
   return (
-    <SafeAreaView style={styles.body}>
-      <JobSearchPage />
-    </SafeAreaView>
+    <Stack.Navigator>
+      <Stack.Screen
+        name="SavedPage"
+        component={SavedPage}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen name="JobPage" component={JobPage} />
+    </Stack.Navigator>
   );
 };
-
-const Tab = createBottomTabNavigator();
 
 const App: () => React$Node = () => {
   return (
@@ -51,7 +69,7 @@ const App: () => React$Node = () => {
               let iconName;
               if (route.name === 'Job Search') {
                 iconName = focused ? 'list' : 'list-outline';
-              } else if (route.name === 'Favourites') {
+              } else if (route.name === 'Saved') {
                 iconName = focused ? 'star' : 'star-outline';
               }
               return <Ionicons name={iconName} size={size} color={color} />;
@@ -64,7 +82,7 @@ const App: () => React$Node = () => {
             showIcon: true,
           }}>
           <Tab.Screen name="Job Search" component={JobSearch} />
-          <Tab.Screen name="Favourites" component={Favourites} />
+          <Tab.Screen name="Saved" component={Saved} />
         </Tab.Navigator>
       </NavigationContainer>
     </Provider>

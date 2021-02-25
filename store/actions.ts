@@ -1,6 +1,6 @@
 export const ACTIONS = {
   LOAD_JOBS: 'LOAD_JOBS',
-  STAR_JOB: 'STAR_JOB',
+  SAVE_JOB: 'SAVE_JOB',
   REMOVE_JOB: 'REMOVE_JOB',
 };
 
@@ -9,8 +9,8 @@ export const loadJobs = (jobs) => ({
   payload: { jobs },
 });
 
-export const starJob = (job) => ({
-  type: ACTIONS.STAR_JOB,
+export const saveJob = (job) => ({
+  type: ACTIONS.SAVE_JOB,
   payload: { job },
 });
 

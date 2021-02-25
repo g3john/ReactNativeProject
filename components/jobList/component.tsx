@@ -1,4 +1,4 @@
-import React, { forwardRef } from 'react';
+import React, { forwardRef, useState } from 'react';
 import { View, FlatList } from 'react-native';
 import Job from '../job';
 
@@ -15,7 +15,11 @@ const testJob = {
 };
 
 const JobList = forwardRef((props, ref) => {
+  const { navigation } = props;
   const jobs = props && props.jobs ? props.jobs : [];
+  const renderItem = ({ item }) => (
+    <Job job={item} navigation={navigation}></Job>
+  );
 
   return (
     <View>
@@ -24,7 +28,9 @@ const JobList = forwardRef((props, ref) => {
           ref={ref}
           data={jobs}
           keyExtractor={(item) => item.id.toString()}
-          renderItem={({ item }) => <Job job={item}></Job>}
+          updateCellsBatchingPeriod={100}
+          removeClippedSubviews={true}
+          renderItem={renderItem}
         />
       )}
     </View>

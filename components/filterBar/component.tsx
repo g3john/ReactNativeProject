@@ -10,9 +10,6 @@ const FilterBar = (props) => {
   };
   const filtersSet = props.filtersSet;
   const categories = props.categories;
-  if (categories && categories[0] && categories[0].id !== -1) {
-    categories.unshift({ id: -1, name: 'All', slug: null });
-  }
   return (
     <View>
       <Picker
