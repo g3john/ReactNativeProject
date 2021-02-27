@@ -77,13 +77,17 @@ const JobPage = (props) => {
             </View>
             <View style={styles.buttonContainer}>
               {isSaved ? (
-                <TouchableHighlight onPress={() => removeJob(job)}>
+                <TouchableHighlight
+                  underlayColor="#DDDDDD"
+                  onPress={() => removeJob(job)}>
                   <View style={styles.buttonTextContainer}>
                     <Text style={styles.button}>UnSave</Text>
                   </View>
                 </TouchableHighlight>
               ) : (
-                <TouchableHighlight onPress={() => saveJob(job)}>
+                <TouchableHighlight
+                  underlayColor="#DDDDDD"
+                  onPress={() => saveJob(job)}>
                   <View style={styles.buttonTextContainer}>
                     <Text style={styles.button}>Save</Text>
                   </View>
