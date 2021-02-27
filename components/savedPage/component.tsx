@@ -4,12 +4,12 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import JobList from '../jobList';
 
 const SavedPage = (props) => {
-  const { jobs } = props;
+  const { jobs, navigation } = props;
   return (
     <View>
       {jobs.length > 0 ? (
         <View>
-          <JobList ref={null} jobs={jobs} />
+          <JobList ref={null} jobs={jobs} navigation={navigation} />
         </View>
       ) : (
         <View>

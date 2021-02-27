@@ -12,12 +12,13 @@ import {
   Platform,
 } from 'react-native';
 import { Provider } from 'react-redux';
+import { PersistGate } from 'redux-persist/integration/react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
-import store from './store';
+import { store, persistor } from './store';
 
 import { Colors } from 'react-native/Libraries/NewAppScreen';
 
@@ -30,7 +31,10 @@ const Stack = createStackNavigator();
 
 const JobSearch = () => {
   return (
-    <Stack.Navigator>
+    <Stack.Navigator
+      screenOptions={{
+        cardStyle: { backgroundColor: Colors.white },
+      }}>
       <Stack.Screen
         name="JobSearchPage"
         component={JobSearchPage}
@@ -47,7 +51,10 @@ const JobSearch = () => {
 
 const Saved = () => {
   return (
-    <Stack.Navigator>
+    <Stack.Navigator
+      screenOptions={{
+        cardStyle: { backgroundColor: Colors.white },
+      }}>
       <Stack.Screen
         name="SavedPage"
         component={SavedPage}
@@ -61,44 +68,43 @@ const Saved = () => {
 const App: () => React$Node = () => {
   return (
     <Provider store={store}>
-      <StatusBar barStyle="dark-content" />
-      <NavigationContainer>
-        <Tab.Navigator
-          screenOptions={({ route }) => ({
-            tabBarIcon: ({ focused, color, size }) => {
-              let iconName;
-              if (route.name === 'Job Search') {
-                iconName = focused ? 'list' : 'list-outline';
-              } else if (route.name === 'Saved') {
-                iconName = focused ? 'star' : 'star-outline';
-              }
-              return <Ionicons name={iconName} size={size} color={color} />;
-            },
-          })}
-          tabBarOptions={{
-            activeTintColor: 'black',
-            inactiveTintColor: 'gray',
-            showLabel: true,
-            showIcon: true,
-          }}>
-          <Tab.Screen name="Job Search" component={JobSearch} />
-          <Tab.Screen name="Saved" component={Saved} />
-        </Tab.Navigator>
-      </NavigationContainer>
+      <PersistGate loading={null} persistor={persistor}>
+        <StatusBar barStyle="dark-content" />
+        <NavigationContainer>
+          <Tab.Navigator
+            screenOptions={({ route }) => ({
+              tabBarIcon: ({ focused, color, size }) => {
+                let iconName;
+                if (route.name === 'Job Search') {
+                  iconName = focused ? 'list' : 'list-outline';
+                } else if (route.name === 'Saved') {
+                  iconName = focused ? 'star' : 'star-outline';
+                }
+                return <Ionicons name={iconName} size={size} color={color} />;
+              },
+            })}
+            tabBarOptions={{
+              activeTintColor: Colors.primary,
+              inactiveTintColor: 'gray',
+              showLabel: true,
+              showIcon: true,
+            }}>
+            <Tab.Screen name="Job Search" component={JobSearch} />
+            <Tab.Screen name="Saved" component={Saved} />
+          </Tab.Navigator>
+        </NavigationContainer>
+      </PersistGate>
     </Provider>
   );
 };
 
 const styles = StyleSheet.create({
   scrollView: {
-    backgroundColor: Colors.lighter,
+    backgroundColor: Colors.white,
   },
   engine: {
     position: 'absolute',
     right: 0,
-  },
-  body: {
-    backgroundColor: Colors.white,
   },
   sectionContainer: {
     marginTop: 32,

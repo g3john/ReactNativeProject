@@ -14,7 +14,7 @@ const JobSearchPage = (props) => {
   const [categories, setCategories] = useState([]);
   const flatListRef = useRef(null);
   const filtersSet = (category, company, search) => {
-    getJobs(category, company, search, null).then((res) => {
+    getJobs(category, company, search, 10).then((res) => {
       loadJobs(res);
       flatListRef.current.scrollToIndex({ animated: true, index: 0 });
     });
@@ -24,7 +24,7 @@ const JobSearchPage = (props) => {
     getCategories().then((res) => {
       setCategories(res ? res : []);
     });
-    getJobs(filters.category, filters.company, filters.search, null).then(
+    getJobs(filters.category, filters.company, filters.search, 10).then(
       (res) => {
         loadJobs(res);
       },
