@@ -25,6 +25,7 @@ import { Colors } from 'react-native/Libraries/NewAppScreen';
 import JobSearchPage from './components/jobSearchPage';
 import SavedPage from './components/savedPage';
 import JobPage from './components/jobPage';
+import FilterPage from './components/filterPage';
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -43,6 +44,11 @@ const JobSearch = () => {
       <Stack.Screen
         name="JobPage"
         component={JobPage}
+        options={{ title: '' }}
+      />
+      <Stack.Screen
+        name="FilterPage"
+        component={FilterPage}
         options={{ title: '' }}
       />
     </Stack.Navigator>

@@ -38,7 +38,11 @@ const JobSearchPage = (props) => {
           styles.shadowBorderBottom,
           { height: Dimensions.get('window').height * 0.1 },
         ]}>
-        <FilterBar filtersSet={filtersSet} categories={categories} />
+        <FilterBar
+          filtersSet={filtersSet}
+          categories={categories}
+          navigation={navigation}
+        />
       </View>
       <View style={{ height: Dimensions.get('window').height * 0.8 }}>
         <JobList ref={flatListRef} jobs={jobs} navigation={navigation} />

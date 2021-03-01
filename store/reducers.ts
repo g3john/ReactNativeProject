@@ -3,6 +3,12 @@ import { ACTIONS } from './actions';
 const initialState = {
   loadedJobs: [],
   savedJobs: [],
+  filters: [],
+  filterOptions: {
+    category: [],
+    jobType: [],
+    candidateRequiredLocation: [],
+  },
 };
 
 export default function (state = initialState, action) {
@@ -25,6 +31,18 @@ export default function (state = initialState, action) {
         savedJobs: state.savedJobs.filter((job) => {
           job.id !== action.payload.jobId;
         }),
+      };
+    }
+    case ACTIONS.SET_FILTERS: {
+      return {
+        ...state,
+        filters: action.payload.filters,
+      };
+    }
+    case ACTIONS.SET_FILTER_OPTIONS: {
+      return {
+        ...state,
+        filterOptions: action.payload.filterOptions,
       };
     }
     default: {

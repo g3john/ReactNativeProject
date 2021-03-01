@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { Picker } from '@react-native-picker/picker';
 
 const FilterBar = (props) => {
+  const { navigation } = props;
   const [selected, setSelected] = useState(null);
   const setCategory = (selected) => {
     setSelected(selected);
@@ -11,23 +12,23 @@ const FilterBar = (props) => {
   const filtersSet = props.filtersSet;
   const categories = props.categories;
   return (
-    <View>
-      <Picker
-        selectedValue={selected}
-        onValueChange={(itemValue) => setCategory(itemValue)}>
-        {categories.map((category) => {
-          return (
-            <Picker.Item
-              key={'category ' + category.id}
-              label={category.name}
-              value={category.slug}
-            />
-          );
-        })}
-      </Picker>
-      <Text>Filter</Text>
+    <View style={styles.container}>
+      <TouchableOpacity
+        onPress={() => {
+          navigation.navigate('FilterPage');
+        }}>
+        <Text>Filter</Text>
+      </TouchableOpacity>
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+});
 
 export default FilterBar;
