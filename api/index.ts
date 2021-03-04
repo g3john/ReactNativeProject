@@ -17,7 +17,24 @@ export const getJobs = (category, companyName, search, limit) => {
   )
     .then((response) => response.json())
     .then((json) => {
-      return json.jobs;
+      const jobs = json.jobs.map((job) => {
+        delete Object.assign(job, { ['companyName']: job['company_name'] })[
+          'company_name'
+        ];
+        delete Object.assign(job, { ['jobType']: job['job_type'] })['job_type'];
+        delete Object.assign(job, {
+          ['candidateRequiredLocation']: job['candidate_required_location'],
+        })['candidate_required_location'];
+        delete Object.assign(job, {
+          ['companyLogoUrl']: job['company_logo_url'],
+        })['company_logo_url'];
+        delete Object.assign(job, {
+          ['publicationDate']: job['publication_date'],
+        })['publication_date'];
+        console.log(job.title, job.publicationDate);
+        return job;
+      });
+      return jobs;
     })
     .catch((e) => console.error(e));
 };

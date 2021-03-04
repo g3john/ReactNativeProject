@@ -2,21 +2,50 @@ import { ACTIONS } from './actions';
 
 const initialState = {
   loadedJobs: [],
+  filteredJobs: [],
   savedJobs: [],
-  filters: [],
+  filters: {
+    category: null,
+    jobType: null,
+    location: [],
+    sort: 'Newest first',
+  },
   filterOptions: {
     category: [],
     jobType: [],
-    candidateRequiredLocation: [],
+    location: [],
   },
+};
+
+const filterJobs = (state, loadedJobs) => {
+  const { category, jobType, location } = state.filters;
+  console.log(category, jobType, location);
+  const filteredJobs = loadedJobs.filter((job) => {
+    if (
+      (!category || category === job.category) &&
+      (!jobType || jobType === job.jobType) &&
+      (location.length === 0 ||
+        location.contains(job.candidateRequiredLocation))
+    ) {
+      return true;
+    }
+    console.log(category, jobType, location);
+    return false;
+  });
+  filteredJobs.sort((a, b) => {
+    return a.publicationDate < b.publicationDate ? 1 : -1;
+  });
+  return filteredJobs.slice(0, 10);
 };
 
 export default function (state = initialState, action) {
   switch (action.type) {
     case ACTIONS.LOAD_JOBS: {
+      const filteredJobs = filterJobs(state, action.payload.jobs);
       return {
         ...state,
         loadedJobs: action.payload.jobs,
+        filteredJobs,
       };
     }
     case ACTIONS.SAVE_JOB: {

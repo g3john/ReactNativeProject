@@ -30,6 +30,7 @@ const JobList = forwardRef((props, ref) => {
           keyExtractor={(item) => item.id.toString()}
           updateCellsBatchingPeriod={100}
           removeClippedSubviews={true}
+          initialNumToRender={2}
           renderItem={renderItem}
         />
       )}

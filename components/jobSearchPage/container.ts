@@ -3,7 +3,7 @@ import JobSearchPage from './component';
 import { loadJobs } from '../../store/actions';
 
 const mapStateToProps = (state) => ({
-  jobs: state.loadedJobs,
+  jobs: state.filteredJobs,
 });
 
 const mapDispatchToProps = {
