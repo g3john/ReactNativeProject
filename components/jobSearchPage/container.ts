@@ -1,12 +1,15 @@
 import { connect } from 'react-redux';
 import JobSearchPage from './component';
-import { loadJobs } from '../../store/actions';
+import { setFilterOptions, loadJobs } from '../../store/actions';
 
-const mapStateToProps = (state) => ({
-  jobs: state.filteredJobs,
-});
+const mapStateToProps = (state) => {
+  return {
+    jobs: state.root.filteredJobs,
+  };
+};
 
 const mapDispatchToProps = {
+  setFilterOptions,
   loadJobs,
 };
 

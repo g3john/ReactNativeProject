@@ -31,7 +31,6 @@ export const getJobs = (category, companyName, search, limit) => {
         delete Object.assign(job, {
           ['publicationDate']: job['publication_date'],
         })['publication_date'];
-        console.log(job.title, job.publicationDate);
         return job;
       });
       return jobs;

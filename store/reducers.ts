@@ -3,7 +3,6 @@ import { ACTIONS } from './actions';
 const initialState = {
   loadedJobs: [],
   filteredJobs: [],
-  savedJobs: [],
   filters: {
     category: null,
     jobType: null,
@@ -18,8 +17,7 @@ const initialState = {
 };
 
 const filterJobs = (state, loadedJobs) => {
-  const { category, jobType, location } = state.filters;
-  console.log(category, jobType, location);
+  const { category, jobType, location, sort } = state.filters;
   const filteredJobs = loadedJobs.filter((job) => {
     if (
       (!category || category === job.category) &&
@@ -29,12 +27,16 @@ const filterJobs = (state, loadedJobs) => {
     ) {
       return true;
     }
-    console.log(category, jobType, location);
     return false;
   });
+
   filteredJobs.sort((a, b) => {
-    return a.publicationDate < b.publicationDate ? 1 : -1;
+    const newestFirst = sort === 'Newest first';
+    const less = newestFirst ? 1 : -1;
+    const more = newestFirst ? -1 : 1;
+    return a.publicationDate < b.publicationDate ? less : more;
   });
+
   return filteredJobs.slice(0, 10);
 };
 
@@ -46,20 +48,6 @@ export default function (state = initialState, action) {
         ...state,
         loadedJobs: action.payload.jobs,
         filteredJobs,
-      };
-    }
-    case ACTIONS.SAVE_JOB: {
-      return {
-        ...state,
-        savedJobs: [...state.savedJobs, action.payload.job],
-      };
-    }
-    case ACTIONS.REMOVE_JOB: {
-      return {
-        ...state,
-        savedJobs: state.savedJobs.filter((job) => {
-          job.id !== action.payload.jobId;
-        }),
       };
     }
     case ACTIONS.SET_FILTERS: {

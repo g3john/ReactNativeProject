@@ -3,9 +3,10 @@ import { View, Dimensions, StyleSheet } from 'react-native';
 import FilterBar from '../filterBar';
 import JobList from '../jobList';
 import { getJobs } from '../../api';
+import { getFilterOptions } from '../../helpers/';
 
 const JobSearchPage = (props) => {
-  const { jobs, loadJobs, navigation } = props;
+  const { jobs, setFilterOptions, loadJobs, navigation } = props;
   const [filters, setFilters] = useState({
     category: 'Software Development',
     company: null,
@@ -18,11 +19,10 @@ const JobSearchPage = (props) => {
   };
 
   useEffect(() => {
-    getJobs(filters.category, filters.company, filters.search, 10).then(
-      (res) => {
-        loadJobs(res);
-      },
-    );
+    getJobs(null, null, null, null).then((res) => {
+      setFilterOptions(getFilterOptions(res));
+      loadJobs(res);
+    });
   }, []);
 
   return (

@@ -3,7 +3,7 @@ import JobPage from './component';
 import { saveJob, removeJob } from '../../store/actions';
 
 const mapStateToProps = (state) => ({
-  savedJobs: state.savedJobs,
+  savedJobs: state.saved.savedJobs,
 });
 
 const mapDispatchToProps = {
