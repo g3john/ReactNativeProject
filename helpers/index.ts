@@ -1,26 +1,46 @@
 export const getFilterOptions = (jobs) => {
-  const category = [];
-  const jobType = [];
-  const location = [];
+  const categoryMap = new Map();
+  const jobTypeMap = new Map();
+  const locationMap = new Map();
 
   jobs.forEach((job) => {
-    if (job.category && category.indexOf(job.category) === -1) {
-      category.push(job.category);
+    if (job.category) {
+      categoryMap.set(job.category, job.category);
     }
-    if (job.jobType && jobType.indexOf(job.jobType) === -1) {
-      jobType.push(job.jobType);
+    if (job.jobType) {
+      const replaced = job.jobType.replace('_', ' ');
+      jobTypeMap.set(replaced, replaced);
     }
-    if (
-      job.candidateRequiredLocation &&
-      location.indexOf(job.candidateRequiredLocation) === -1
-    ) {
-      location.push(job.candidateRequiredLocation);
+    if (job.candidateRequiredLocation) {
+      locationMap.set(
+        job.candidateRequiredLocation,
+        job.candidateRequiredLocation,
+      );
     }
   });
-  category.sort();
-  jobType.sort();
-  location.sort();
-  console.log('Filter options', category, jobType, location);
+  const category = Array.from(categoryMap, ([key, value]) => ({
+    item: key,
+    id: value,
+  }));
+  const jobType = Array.from(jobTypeMap, ([key, value]) => ({
+    item: key,
+    id: value,
+  }));
+  const location = Array.from(locationMap, ([key, value]) => ({
+    item: key,
+    id: value,
+  }));
 
+  category.sort((a, b) => {
+    return a.item < b.item ? -1 : 1;
+  });
+  // category.unshift({ item: ' ', id: 'none' });
+  jobType.sort((a, b) => {
+    return a.item < b.item ? -1 : 1;
+  });
+  // jobType.unshift({ item: ' ', id: 'none' });
+  location.sort((a, b) => {
+    return a.item < b.item ? -1 : 1;
+  });
   return { category, jobType, location };
 };
