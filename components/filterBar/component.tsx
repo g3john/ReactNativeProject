@@ -4,13 +4,6 @@ import { Colors } from 'react-native/Libraries/NewAppScreen';
 
 const FilterBar = (props) => {
   const { navigation } = props;
-  const [selected, setSelected] = useState(null);
-  const setCategory = (selected) => {
-    setSelected(selected);
-    filtersSet(selected, null, null);
-  };
-  const filtersSet = props.filtersSet;
-  const categories = props.categories;
   return (
     <View style={styles.container}>
       <TouchableOpacity

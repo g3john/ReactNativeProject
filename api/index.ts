@@ -38,14 +38,3 @@ export const getJobs = (category, companyName, search, limit) => {
     })
     .catch((e) => console.error(e));
 };
-
-export const getCategories = () => {
-  return fetch('https://remotive.io/api/remote-jobs/categories', {
-    method: 'GET',
-  })
-    .then((response) => response.json())
-    .then((json) => {
-      return json.jobs;
-    })
-    .catch((e) => console.error(e));
-};

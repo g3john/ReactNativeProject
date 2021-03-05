@@ -2,7 +2,7 @@ import React, { useEffect, useState, useRef } from 'react';
 import { View, Dimensions, StyleSheet } from 'react-native';
 import FilterBar from '../filterBar';
 import JobList from '../jobList';
-import { getJobs, getCategories } from '../../api';
+import { getJobs } from '../../api';
 
 const JobSearchPage = (props) => {
   const { jobs, loadJobs, navigation } = props;
@@ -13,17 +13,11 @@ const JobSearchPage = (props) => {
   });
   const [categories, setCategories] = useState([]);
   const flatListRef = useRef(null);
-  const filtersSet = (category, company, search) => {
-    getJobs(category, company, search, 10).then((res) => {
-      loadJobs(res);
-      flatListRef.current.scrollToIndex({ animated: true, index: 0 });
-    });
+  const filtersSet = () => {
+    flatListRef.current.scrollToIndex({ animated: true, index: 0 });
   };
 
   useEffect(() => {
-    getCategories().then((res) => {
-      setCategories(res ? res : []);
-    });
     getJobs(filters.category, filters.company, filters.search, 10).then(
       (res) => {
         loadJobs(res);
