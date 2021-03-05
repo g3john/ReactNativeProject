@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
-import { Picker } from '@react-native-picker/picker';
+import { Colors } from 'react-native/Libraries/NewAppScreen';
 
 const FilterBar = (props) => {
   const { navigation } = props;
@@ -14,10 +14,11 @@ const FilterBar = (props) => {
   return (
     <View style={styles.container}>
       <TouchableOpacity
+        style={styles.touchable}
         onPress={() => {
           navigation.navigate('FilterPage');
         }}>
-        <Text>Filter</Text>
+        <Text style={styles.text}>Filter</Text>
       </TouchableOpacity>
     </View>
   );
@@ -28,6 +29,16 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  touchable: {
+    width: '100%',
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  text: {
+    color: Colors.primary,
+    fontSize: 16,
   },
 });
 

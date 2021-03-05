@@ -91,9 +91,11 @@ const App: () => React$Node = () => {
             })}
             tabBarOptions={{
               activeTintColor: Colors.primary,
-              inactiveTintColor: 'gray',
+              inactiveTintColor: Colors.dark,
+              inactiveBackgroundColor: Colors.lighter,
               showLabel: true,
               showIcon: true,
+              labelStyle: styles.bottomTabText,
             }}>
             <Tab.Screen name="Job Search" component={JobSearch} />
             <Tab.Screen name="Saved" component={Saved} />
@@ -137,6 +139,9 @@ const styles = StyleSheet.create({
     padding: 4,
     paddingRight: 12,
     textAlign: 'right',
+  },
+  bottomTabText: {
+    fontSize: 12,
   },
 });
 
