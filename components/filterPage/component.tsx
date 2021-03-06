@@ -1,33 +1,59 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, TextInput, StyleSheet } from 'react-native';
+import { View, Text, TouchableHighlight, StyleSheet } from 'react-native';
 import SelectBox from 'react-native-multi-selectbox';
-import { Button } from 'react-native-vector-icons/Ionicons';
 import { Colors } from 'react-native/Libraries/NewAppScreen';
 
 const FilterPage = (props) => {
-  const { filters, filterOptions, setFilters } = props;
+  const { filters, filterOptions, setFilters, navigation } = props;
   const [category, setCategory] = useState({});
   const [jobType, setJobType] = useState({});
   const [location, setLocation] = useState([]);
-  const [sort, setSort] = useState('Newest first');
+  const [sort, setSort] = useState({
+    id: 'Newest first',
+    item: 'Newest first',
+  });
   const [locationMap, setLocationMap] = useState(new Map());
+
   const {
     category: categoryOptions,
     jobType: jobTypeOptions,
     location: locationOptions,
   } = filterOptions;
   const dateOptions = [
-    { item: 'Newest first', id: 'Newest' },
-    { item: 'Oldest first', id: 'Oldest' },
+    { item: 'Newest first', id: 'Newest first' },
+    { item: 'Oldest first', id: 'Oldest first' },
   ];
+
+  useEffect(() => {
+    if (filters.category) {
+      setCategory({ id: filters.category, item: filters.category });
+    }
+    if (filters.jobType) {
+      setJobType({ id: filters.jobType, item: filters.jobType });
+    }
+    if (filters.location.length > 0) {
+      const newLocation = [];
+      filters.location.forEach((loc) => {
+        newLocation.push({ id: loc, item: loc });
+      });
+      setLocation(newLocation);
+    }
+    setSort({ id: filters.sort, item: filters.sort });
+  }, []);
+
   const onSet = () => {
+    const locationArr = [];
+    location.forEach((loc) => {
+      locationArr.push(loc.item);
+    });
     const newFilters = {
-      category,
-      jobType,
-      location,
-      sort,
+      category: category.item ? category.item : null,
+      jobType: jobType.item ? jobType.item : null,
+      location: locationArr,
+      sort: sort.item,
     };
-    // setFilters(newFilters);
+    setFilters(newFilters);
+    navigation.goBack();
   };
 
   const onMultiChange = (item) => {
@@ -110,7 +136,13 @@ const FilterPage = (props) => {
         arrowIconColor={Colors.dark}
       />
       <View style={styles.hr} />
-      <Button onPress={() => onSet()} />
+      <View style={styles.buttonContainer}>
+        <TouchableHighlight underlayColor="#DDDDDD" onPress={() => onSet()}>
+          <View style={styles.buttonTextContainer}>
+            <Text style={styles.button}>Filter</Text>
+          </View>
+        </TouchableHighlight>
+      </View>
     </View>
   );
 };
@@ -128,8 +160,8 @@ const styles = StyleSheet.create({
   },
   filterContainer: {
     backgroundColor: Colors.lighter,
-    marginTop: 10,
-    marginBottom: 10,
+    marginTop: 20,
+    marginBottom: 20,
     paddingTop: 15,
     paddingLeft: 15,
     paddingBottom: 15,
@@ -142,15 +174,17 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  buttonTextContainer: {
+    backgroundColor: Colors.primary,
+    borderRadius: 5,
+    marginTop: 20,
+    padding: 10,
+  },
+  button: {
+    fontSize: 16,
+    color: Colors.white,
+    textAlign: 'center',
+  },
 });
 
 export default FilterPage;
-
-/*
-    title, SEARCH
-    company_name: companyName, SEARCH
-    category, PICKER
-    jobType, PICKER
-    candidateRequiredLocation, SELECT
-    publicationDate, SORT
-*/
