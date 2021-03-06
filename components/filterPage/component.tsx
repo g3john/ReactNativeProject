@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import {
+  SafeAreaView,
   View,
   Text,
   TouchableHighlight,
@@ -79,7 +80,7 @@ const FilterPage = (props) => {
   };
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <SelectBox
         label="Category"
         inputPlaceholder="Category"
@@ -106,6 +107,7 @@ const FilterPage = (props) => {
         hideInputFilter={true}
         labelStyle={styles.label}
         containerStyle={styles.filterContainer}
+        optionContainerStyle={styles.optionContainer}
         arrowIconColor={Colors.dark}
       />
       <View style={styles.hr} />
@@ -137,6 +139,7 @@ const FilterPage = (props) => {
         hideInputFilter={true}
         labelStyle={styles.label}
         containerStyle={styles.filterContainer}
+        optionContainerStyle={styles.optionContainer}
         arrowIconColor={Colors.dark}
       />
       <View style={[styles.hr, styles.marginBottom]} />
@@ -147,7 +150,7 @@ const FilterPage = (props) => {
           </View>
         </TouchableHighlight>
       </View>
-    </View>
+    </SafeAreaView>
   );
 };
 
@@ -175,8 +178,6 @@ const styles = StyleSheet.create({
   },
   optionContainer: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
   },
   marginBottom: {
     marginBottom: 20,
@@ -184,7 +185,7 @@ const styles = StyleSheet.create({
   buttonTextContainer: {
     backgroundColor: Colors.primary,
     borderRadius: 5,
-    padding: 10,
+    padding: 15,
   },
   button: {
     fontSize: 16,

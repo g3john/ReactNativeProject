@@ -1,6 +1,7 @@
 import { ACTIONS } from './actions';
 
 const initialState = {
+  isLoadingJobs: false,
   loadedJobs: [],
   filteredJobs: [],
   nonDisplayedJobs: [],
@@ -55,6 +56,12 @@ const filterJobs = (loadedJobs, filters, amountToDisplay) => {
 
 export default function (state = initialState, action) {
   switch (action.type) {
+    case ACTIONS.SET_LOADING_JOBS: {
+      return {
+        ...state,
+        isLoadingJobs: action.payload.isLoading,
+      };
+    }
     case ACTIONS.LOAD_JOBS: {
       const { displayed, nonDisplayed } = filterJobs(
         action.payload.jobs,

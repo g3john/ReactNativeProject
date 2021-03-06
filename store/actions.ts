@@ -1,4 +1,5 @@
 export const ACTIONS = {
+  SET_LOADING_JOBS: 'SET_LOADING_JOBS',
   LOAD_JOBS: 'LOAD_JOBS',
   SAVE_JOB: 'SAVE_JOB',
   REMOVE_JOB: 'REMOVE_JOB',
@@ -21,6 +22,11 @@ type FilterOptions = {
   jobType: string[];
   candidateRequiredLocation: string[];
 };
+
+export const setLoadingJobs = (isLoading) => ({
+  type: ACTIONS.SET_LOADING_JOBS,
+  payload: { isLoading },
+});
 
 export const loadJobs = (jobs) => ({
   type: ACTIONS.LOAD_JOBS,

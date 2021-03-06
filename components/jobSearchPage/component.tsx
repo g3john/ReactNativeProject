@@ -1,12 +1,24 @@
 import React, { useEffect, useState, useRef } from 'react';
-import { View, Dimensions, StyleSheet, DeviceEventEmitter } from 'react-native';
+import {
+  View,
+  ActivityIndicator,
+  Dimensions,
+  StyleSheet,
+  DeviceEventEmitter,
+} from 'react-native';
 import FilterBar from '../filterBar';
 import JobList from '../jobList';
 import { getJobs } from '../../api';
 import { getFilterOptions } from '../../helpers/';
 
 const JobSearchPage = (props) => {
-  const { setFilterOptions, loadJobs, navigation } = props;
+  const {
+    isLoading,
+    setLoadingJobs,
+    setFilterOptions,
+    loadJobs,
+    navigation,
+  } = props;
   const [filters, setFilters] = useState({
     category: 'Software Development',
     company: null,
@@ -18,9 +30,12 @@ const JobSearchPage = (props) => {
   });
 
   useEffect(() => {
+    setLoadingJobs(true);
     getJobs(null, null, null, null).then((res) => {
       setFilterOptions(getFilterOptions(res));
       loadJobs(res);
+      setLoadingJobs(false);
+      navigation.navigate('FilterPage');
     });
   }, []);
 
@@ -33,9 +48,16 @@ const JobSearchPage = (props) => {
         ]}>
         <FilterBar navigation={navigation} />
       </View>
-      <View style={{ height: Dimensions.get('window').height * 0.8 }}>
-        <JobList ref={flatListRef} navigation={navigation} />
-      </View>
+      {isLoading ? (
+        <View style={styles.activityIndicator}>
+          <ActivityIndicator size="large" color="#00ff00" />
+        </View>
+      ) : (
+        <View style={{ height: Dimensions.get('window').height * 0.8 }}>
+          <JobList ref={flatListRef} navigation={navigation} />
+        </View>
+      )}
+
       <View
         style={[
           styles.shadowBorderTop,
@@ -58,6 +80,10 @@ const styles = StyleSheet.create({
     shadowRadius: 16,
     shadowOpacity: 0.85,
     elevation: 24,
+  },
+  activityIndicator: {
+    flex: 1,
+    justifyContent: 'center',
   },
 });
 

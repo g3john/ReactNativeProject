@@ -56,7 +56,6 @@ const JobList = forwardRef((props, ref) => {
 
 const styles = StyleSheet.create({
   activityIndicator: {
-    alignItems: 'center',
     padding: 10,
   },
 });
