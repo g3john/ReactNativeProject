@@ -1,22 +1,21 @@
 import React, { useEffect, useState, useRef } from 'react';
-import { View, Dimensions, StyleSheet } from 'react-native';
+import { View, Dimensions, StyleSheet, DeviceEventEmitter } from 'react-native';
 import FilterBar from '../filterBar';
 import JobList from '../jobList';
 import { getJobs } from '../../api';
 import { getFilterOptions } from '../../helpers/';
 
 const JobSearchPage = (props) => {
-  const { jobs, setFilterOptions, loadJobs, navigation } = props;
+  const { setFilterOptions, loadJobs, navigation } = props;
   const [filters, setFilters] = useState({
     category: 'Software Development',
     company: null,
     search: null,
   });
-  const [categories, setCategories] = useState([]);
   const flatListRef = useRef(null);
-  const filtersSet = () => {
+  DeviceEventEmitter.addListener('event.scrollToTop', () => {
     flatListRef.current.scrollToIndex({ animated: true, index: 0 });
-  };
+  });
 
   useEffect(() => {
     getJobs(null, null, null, null).then((res) => {
@@ -32,14 +31,10 @@ const JobSearchPage = (props) => {
           styles.shadowBorderBottom,
           { height: Dimensions.get('window').height * 0.1 },
         ]}>
-        <FilterBar
-          filtersSet={filtersSet}
-          categories={categories}
-          navigation={navigation}
-        />
+        <FilterBar navigation={navigation} />
       </View>
       <View style={{ height: Dimensions.get('window').height * 0.8 }}>
-        <JobList ref={flatListRef} jobs={jobs} navigation={navigation} />
+        <JobList ref={flatListRef} navigation={navigation} />
       </View>
       <View
         style={[

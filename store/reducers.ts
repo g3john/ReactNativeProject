@@ -3,6 +3,8 @@ import { ACTIONS } from './actions';
 const initialState = {
   loadedJobs: [],
   filteredJobs: [],
+  nonDisplayedJobs: [],
+  amountToDisplay: 10,
   filters: {
     category: null,
     jobType: null,
@@ -16,7 +18,7 @@ const initialState = {
   },
 };
 
-const filterJobs = (loadedJobs, filters) => {
+const filterJobs = (loadedJobs, filters, amountToDisplay) => {
   try {
     const { category, jobType, location, sort } = filters;
     const filteredJobs = loadedJobs.filter((job) => {
@@ -38,29 +40,54 @@ const filterJobs = (loadedJobs, filters) => {
       return a.publicationDate < b.publicationDate ? less : more;
     });
 
-    return filteredJobs.slice(0, 10);
+    return {
+      displayed: filteredJobs.slice(0, amountToDisplay),
+      nonDisplayed: filteredJobs.slice(amountToDisplay),
+    };
   } catch (e) {
     console.error(e);
-    return loadedJobs.slice(0, 10);
+    return {
+      displayed: loadedJobs.slice(0, 10),
+      nonDisplayed: loadedJobs.slice(amountToDisplay),
+    };
   }
 };
 
 export default function (state = initialState, action) {
   switch (action.type) {
     case ACTIONS.LOAD_JOBS: {
-      const filteredJobs = filterJobs(action.payload.jobs, state.filters);
+      const { displayed, nonDisplayed } = filterJobs(
+        action.payload.jobs,
+        state.filters,
+        10,
+      );
       return {
         ...state,
         loadedJobs: action.payload.jobs,
-        filteredJobs,
+        filteredJobs: displayed,
+        nonDisplayedJobs: nonDisplayed,
+      };
+    }
+    case ACTIONS.DISPLAY_MORE: {
+      return {
+        ...state,
+        filteredJobs: state.filteredJobs.concat(
+          state.nonDisplayedJobs.slice(0, 10),
+        ),
+        nonDisplayedJobs: state.nonDisplayedJobs.slice(10),
       };
     }
     case ACTIONS.SET_FILTERS: {
-      const filteredJobs = filterJobs(state.loadedJobs, action.payload.filters);
+      const { displayed, nonDisplayed } = filterJobs(
+        state.loadedJobs,
+        action.payload.filters,
+        10,
+      );
       return {
         ...state,
         filters: action.payload.filters,
-        filteredJobs,
+        filteredJobs: displayed,
+        nonDisplayed: nonDisplayed,
       };
     }
     case ACTIONS.SET_FILTER_OPTIONS: {

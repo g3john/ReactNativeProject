@@ -1,5 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, TouchableHighlight, StyleSheet } from 'react-native';
+import {
+  View,
+  Text,
+  TouchableHighlight,
+  StyleSheet,
+  DeviceEventEmitter,
+} from 'react-native';
 import SelectBox from 'react-native-multi-selectbox';
 import { Colors } from 'react-native/Libraries/NewAppScreen';
 
@@ -54,6 +60,7 @@ const FilterPage = (props) => {
     };
     setFilters(newFilters);
     navigation.goBack();
+    DeviceEventEmitter.emit('event.scrollToTop');
   };
 
   const onMultiChange = (item) => {

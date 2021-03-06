@@ -2,6 +2,7 @@ export const ACTIONS = {
   LOAD_JOBS: 'LOAD_JOBS',
   SAVE_JOB: 'SAVE_JOB',
   REMOVE_JOB: 'REMOVE_JOB',
+  DISPLAY_MORE: 'DISPLAY_MORE',
   SET_FILTERS: 'SET_FILTERS',
   SET_FILTER_OPTIONS: 'SET_FILTER_OPTIONS',
 };
@@ -34,6 +35,10 @@ export const saveJob = (job) => ({
 export const removeJob = (jobId) => ({
   type: ACTIONS.REMOVE_JOB,
   payload: { jobId },
+});
+
+export const displayMore = () => ({
+  type: ACTIONS.DISPLAY_MORE,
 });
 
 export const setFilters = (filters: Filters) => ({

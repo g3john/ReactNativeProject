@@ -15,12 +15,10 @@ const testJob = {
 };
 
 const JobList = forwardRef((props, ref) => {
-  const { navigation } = props;
-  const jobs = props && props.jobs ? props.jobs : [];
+  const { jobs, displayMore, navigation } = props;
   const renderItem = ({ item }) => (
     <Job job={item} navigation={navigation}></Job>
   );
-
   return (
     <View>
       {jobs && (
@@ -31,6 +29,8 @@ const JobList = forwardRef((props, ref) => {
           updateCellsBatchingPeriod={100}
           removeClippedSubviews={true}
           initialNumToRender={2}
+          onEndReached={() => displayMore()}
+          onEndReachedThreshold={5}
           renderItem={renderItem}
         />
       )}

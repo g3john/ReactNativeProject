@@ -1,2 +1,2 @@
-import JobList from './component';
+import JobList from './container';
 export default JobList;
