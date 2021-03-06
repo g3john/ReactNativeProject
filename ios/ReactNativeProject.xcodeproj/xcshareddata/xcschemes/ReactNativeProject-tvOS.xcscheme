@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "2D02E47A1E0B4A5D006451C7"
-               BuildableName = "ReactNativeProject-tvOS.app"
-               BlueprintName = "ReactNativeProject-tvOS"
-               ReferencedContainer = "container:ReactNativeProject.xcodeproj">
+               BuildableName = "LacunaTec Job Search-tvOS.app"
+               BlueprintName = "LacunaTec Job Search-tvOS"
+               ReferencedContainer = "container:LacunaTec Job Search.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "2D02E48F1E0B4A5D006451C7"
-               BuildableName = "ReactNativeProject-tvOSTests.xctest"
-               BlueprintName = "ReactNativeProject-tvOSTests"
-               ReferencedContainer = "container:ReactNativeProject.xcodeproj">
+               BuildableName = "LacunaTec Job Search-tvOSTests.xctest"
+               BlueprintName = "LacunaTec Job Search-tvOSTests"
+               ReferencedContainer = "container:LacunaTec Job Search.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -55,9 +55,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "2D02E47A1E0B4A5D006451C7"
-            BuildableName = "ReactNativeProject-tvOS.app"
-            BlueprintName = "ReactNativeProject-tvOS"
-            ReferencedContainer = "container:ReactNativeProject.xcodeproj">
+            BuildableName = "LacunaTec Job Search-tvOS.app"
+            BlueprintName = "LacunaTec Job Search-tvOS"
+            ReferencedContainer = "container:LacunaTec Job Search.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -72,9 +72,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "2D02E47A1E0B4A5D006451C7"
-            BuildableName = "ReactNativeProject-tvOS.app"
-            BlueprintName = "ReactNativeProject-tvOS"
-            ReferencedContainer = "container:ReactNativeProject.xcodeproj">
+            BuildableName = "LacunaTec Job Search-tvOS.app"
+            BlueprintName = "LacunaTec Job Search-tvOS"
+            ReferencedContainer = "container:LacunaTec Job Search.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

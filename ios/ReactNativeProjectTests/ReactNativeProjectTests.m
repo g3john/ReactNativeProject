@@ -7,11 +7,11 @@
 #define TIMEOUT_SECONDS 600
 #define TEXT_TO_LOOK_FOR @"Welcome to React"
 
-@interface ReactNativeProjectTests : XCTestCase
+@interface LacunaTec Job SearchTests : XCTestCase
 
 @end
 
-@implementation ReactNativeProjectTests
+@implementation LacunaTec Job SearchTests
 
 - (BOOL)findSubviewInView:(UIView *)view matching:(BOOL(^)(UIView *view))test
 {

@@ -3,12 +3,12 @@ require_relative '../node_modules/@react-native-community/cli-platform-ios/nativ
 
 platform :ios, '10.0'
 
-target 'ReactNativeProject' do
+target 'LacunaTec Job Search' do
   config = use_native_modules!
 
   use_react_native!(:path => config["reactNativePath"])
 
-  target 'ReactNativeProjectTests' do
+  target 'LacunaTec Job SearchTests' do
     inherit! :complete
     # Pods for testing
   end
@@ -23,10 +23,10 @@ target 'ReactNativeProject' do
   end
 end
 
-target 'ReactNativeProject-tvOS' do
-  # Pods for ReactNativeProject-tvOS
+target 'LacunaTec Job Search-tvOS' do
+  # Pods for LacunaTec Job Search-tvOS
 
-  target 'ReactNativeProject-tvOSTests' do
+  target 'LacunaTec Job Search-tvOSTests' do
     inherit! :search_paths
     # Pods for testing
   end
