@@ -93,7 +93,7 @@ const FilterPage = (props) => {
         labelStyle={styles.label}
         containerStyle={styles.filterContainer}
         optionContainerStyle={styles.optionContainer}
-        arrowIconColor={Colors.dark}
+        arrowIconColor={Colors.black}
       />
       <View style={styles.hr} />
       <SelectBox
@@ -108,7 +108,7 @@ const FilterPage = (props) => {
         labelStyle={styles.label}
         containerStyle={styles.filterContainer}
         optionContainerStyle={styles.optionContainer}
-        arrowIconColor={Colors.dark}
+        arrowIconColor={Colors.black}
       />
       <View style={styles.hr} />
       <SelectBox
@@ -124,7 +124,9 @@ const FilterPage = (props) => {
         }}
         labelStyle={styles.label}
         containerStyle={styles.filterContainer}
-        arrowIconColor={Colors.dark}
+        arrowIconColor={Colors.black}
+        searchIconColor={Colors.black}
+        toggleIconColor={Colors.primary}
         isMulti
       />
       <View style={styles.hr} />
@@ -140,7 +142,7 @@ const FilterPage = (props) => {
         labelStyle={styles.label}
         containerStyle={styles.filterContainer}
         optionContainerStyle={styles.optionContainer}
-        arrowIconColor={Colors.dark}
+        arrowIconColor={Colors.black}
       />
       <View style={[styles.hr, styles.marginBottom]} />
       <View style={styles.buttonContainer}>

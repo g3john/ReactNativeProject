@@ -1,18 +1,7 @@
-import React, { forwardRef, useState } from 'react';
+import React, { forwardRef } from 'react';
 import { View, FlatList, ActivityIndicator, StyleSheet } from 'react-native';
+import { Colors } from 'react-native/Libraries/NewAppScreen';
 import Job from '../job';
-
-const testJob = {
-  id: '123',
-  url: '',
-  title: 'Test Job',
-  companyName: 'Test Company',
-  category: 'Software Engineer',
-  jobType: 'Remote',
-  candidateRequiredLocation: 'Toronto',
-  salary: '$100000',
-  description: 'This is a test job',
-};
 
 const JobList = forwardRef((props, ref) => {
   const {
@@ -29,7 +18,7 @@ const JobList = forwardRef((props, ref) => {
   const footerComponent =
     !isSaved && nonDisplayedJobs && nonDisplayedJobs.length ? (
       <View style={styles.activityIndicator}>
-        <ActivityIndicator size="large" color="#00ff00" />
+        <ActivityIndicator size="large" color={Colors.primary} />
       </View>
     ) : null;
   const jobsToShow = isSaved ? savedJobs : jobs;

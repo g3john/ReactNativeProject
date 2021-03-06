@@ -2,7 +2,6 @@ import React from 'react';
 import {
   View,
   Text,
-  Image,
   StyleSheet,
   Dimensions,
   TouchableOpacity,
@@ -10,20 +9,27 @@ import {
 import FastImage from 'react-native-fast-image';
 import IonIcons from 'react-native-vector-icons/Ionicons';
 
+/* Job props
+  id,
+  url,
+  title,
+  companyName,
+  category,
+  jobType,
+  candidateRequiredLocation,
+  salary,
+  description,
+  companyLogoUrl,
+  publicationDate,
+  tags,
+*/
+
 const Job = (props) => {
   const {
-    id,
-    url,
     title,
     companyName,
-    category,
-    jobType,
     candidateRequiredLocation,
-    salary,
-    description,
     companyLogoUrl,
-    publicationDate,
-    tags,
   } = props.job;
   const { navigation } = props;
 

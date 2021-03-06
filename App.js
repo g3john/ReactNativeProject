@@ -127,13 +127,13 @@ const styles = StyleSheet.create({
     marginTop: 8,
     fontSize: 18,
     fontWeight: '400',
-    color: Colors.dark,
+    color: Colors.black,
   },
   highlight: {
     fontWeight: '700',
   },
   footer: {
-    color: Colors.dark,
+    color: Colors.black,
     fontSize: 12,
     fontWeight: '600',
     padding: 4,

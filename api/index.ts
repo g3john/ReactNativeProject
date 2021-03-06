@@ -1,20 +1,7 @@
-export const getJobs = (category, companyName, search, limit) => {
-  const categoryStr = category ? '&category=' + category : '';
-  const companyNameStr = companyName
-    ? '&company_name=' + encodeURIComponent(companyName)
-    : '';
-  const searchStr = search ? '&search=' + encodeURIComponent(search) : '';
-  const limitStr = limit ? '&limit=' + limit : '';
-  return fetch(
-    'https://remotive.io/api/remote-jobs?' +
-      categoryStr +
-      companyNameStr +
-      searchStr +
-      limitStr,
-    {
-      method: 'GET',
-    },
-  )
+export const getJobs = () => {
+  return fetch('https://remotive.io/api/remote-jobs', {
+    method: 'GET',
+  })
     .then((response) => response.json())
     .then((json) => {
       const jobs = json.jobs.map((job) => {

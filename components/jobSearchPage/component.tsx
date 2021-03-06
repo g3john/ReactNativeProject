@@ -10,6 +10,7 @@ import FilterBar from '../filterBar';
 import JobList from '../jobList';
 import { getJobs } from '../../api';
 import { getFilterOptions } from '../../helpers/';
+import { Colors } from 'react-native/Libraries/NewAppScreen';
 
 const JobSearchPage = (props) => {
   const {
@@ -19,11 +20,6 @@ const JobSearchPage = (props) => {
     loadJobs,
     navigation,
   } = props;
-  const [filters, setFilters] = useState({
-    category: 'Software Development',
-    company: null,
-    search: null,
-  });
   const flatListRef = useRef(null);
   DeviceEventEmitter.addListener('event.scrollToTop', () => {
     flatListRef.current.scrollToIndex({ animated: true, index: 0 });
@@ -31,26 +27,26 @@ const JobSearchPage = (props) => {
 
   useEffect(() => {
     setLoadingJobs(true);
-    getJobs(null, null, null, null).then((res) => {
+    getJobs().then((res) => {
       setFilterOptions(getFilterOptions(res));
+      navigation.navigate('FilterPage');
       loadJobs(res);
       setLoadingJobs(false);
-      navigation.navigate('FilterPage');
     });
   }, []);
 
   return (
-    <View>
+    <View style={{ flex: 1 }}>
       <View
         style={[
           styles.shadowBorderBottom,
           { height: Dimensions.get('window').height * 0.1 },
         ]}>
-        <FilterBar navigation={navigation} />
+        {!isLoading && <FilterBar navigation={navigation} />}
       </View>
       {isLoading ? (
         <View style={styles.activityIndicator}>
-          <ActivityIndicator size="large" color="#00ff00" />
+          <ActivityIndicator size="large" color={Colors.primary} />
         </View>
       ) : (
         <View style={{ height: Dimensions.get('window').height * 0.8 }}>
@@ -69,13 +65,13 @@ const JobSearchPage = (props) => {
 
 const styles = StyleSheet.create({
   shadowBorderBottom: {
-    backgroundColor: '#fff',
-    shadowColor: '#000',
+    backgroundColor: Colors.white,
+    shadowColor: Colors.black,
     shadowOpacity: 0.5,
     elevation: 24,
   },
   shadowBorderTop: {
-    shadowColor: '#000',
+    shadowColor: Colors.black,
     shadowOffset: { width: 0, height: -12 },
     shadowRadius: 16,
     shadowOpacity: 0.85,
@@ -84,6 +80,7 @@ const styles = StyleSheet.create({
   activityIndicator: {
     flex: 1,
     justifyContent: 'center',
+    alignItems: 'center',
   },
 });
 

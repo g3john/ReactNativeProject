@@ -13,6 +13,21 @@ import IonIcons from 'react-native-vector-icons/Ionicons';
 import { WebView } from 'react-native-webview';
 import { Colors } from 'react-native/Libraries/NewAppScreen';
 
+/* Job props
+  id,
+  url,
+  title,
+  companyName,
+  category,
+  jobType,
+  candidateRequiredLocation,
+  salary,
+  description,
+  companyLogoUrl,
+  publicationDate,
+  tags,
+*/
+
 const JobPage = (props) => {
   const [isSaved, setIsSaved] = useState(false);
   const { job } = props.route.params;
@@ -21,14 +36,9 @@ const JobPage = (props) => {
     url,
     title,
     companyName,
-    category,
-    jobType,
     candidateRequiredLocation,
-    salary,
     description,
     companyLogoUrl,
-    publicationDate,
-    tags,
   } = job;
   const { savedJobs, saveJob, removeJob } = props;
   useEffect(() => {
@@ -110,8 +120,8 @@ const styles = StyleSheet.create({
   jobContainer: {
     padding: 10,
     flexDirection: 'row',
-    backgroundColor: '#fff',
-    shadowColor: '#000',
+    backgroundColor: Colors.white,
+    shadowColor: Colors.black,
     shadowOpacity: 0.5,
     elevation: 24,
   },
