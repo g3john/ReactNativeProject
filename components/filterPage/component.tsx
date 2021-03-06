@@ -135,7 +135,7 @@ const FilterPage = (props) => {
         containerStyle={styles.filterContainer}
         arrowIconColor={Colors.dark}
       />
-      <View style={styles.hr} />
+      <View style={[styles.hr, styles.marginBottom]} />
       <View style={styles.buttonContainer}>
         <TouchableHighlight underlayColor="#DDDDDD" onPress={() => onSet()}>
           <View style={styles.buttonTextContainer}>
@@ -174,10 +174,12 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  marginBottom: {
+    marginBottom: 20,
+  },
   buttonTextContainer: {
     backgroundColor: Colors.primary,
     borderRadius: 5,
-    marginTop: 20,
     padding: 10,
   },
   button: {
