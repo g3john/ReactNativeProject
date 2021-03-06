@@ -79,7 +79,6 @@ const FilterPage = (props) => {
         options={categoryOptions}
         value={category}
         onChange={(val) => {
-          console.log('category', val);
           setCategory(val);
         }}
         hideInputFilter={true}
@@ -95,7 +94,6 @@ const FilterPage = (props) => {
         options={jobTypeOptions}
         value={jobType}
         onChange={(val) => {
-          console.log('jobType', val);
           setJobType(val);
         }}
         hideInputFilter={true}
@@ -127,7 +125,6 @@ const FilterPage = (props) => {
         options={dateOptions}
         value={sort}
         onChange={(val) => {
-          console.log('sort', val);
           setSort(val);
         }}
         hideInputFilter={true}

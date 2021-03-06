@@ -19,7 +19,6 @@ const initialState = {
 const filterJobs = (state, loadedJobs, filters) => {
   try {
     const { category, jobType, location, sort } = filters;
-    console.log('location', location);
     const filteredJobs = loadedJobs.filter((job) => {
       if (
         (!category || category === job.category) &&
@@ -31,7 +30,6 @@ const filterJobs = (state, loadedJobs, filters) => {
       }
       return false;
     });
-    console.log('FILTERED', filteredJobs.length);
 
     filteredJobs.sort((a, b) => {
       const newestFirst = sort === 'Newest first';
