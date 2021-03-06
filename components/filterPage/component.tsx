@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, TextInput, StyleSheet } from 'react-native';
-import { Picker } from '@react-native-picker/picker';
 import SelectBox from 'react-native-multi-selectbox';
 import { Button } from 'react-native-vector-icons/Ionicons';
 import { Colors } from 'react-native/Libraries/NewAppScreen';
@@ -11,12 +10,12 @@ const FilterPage = (props) => {
   const [jobType, setJobType] = useState({});
   const [location, setLocation] = useState([]);
   const [sort, setSort] = useState('Newest first');
+  const [locationMap, setLocationMap] = useState(new Map());
   const {
     category: categoryOptions,
     jobType: jobTypeOptions,
     location: locationOptions,
   } = filterOptions;
-  console.log('LOCATION OPTIONS', jobTypeOptions);
   const dateOptions = [
     { item: 'Newest first', id: 'Newest' },
     { item: 'Oldest first', id: 'Oldest' },
@@ -30,6 +29,22 @@ const FilterPage = (props) => {
     };
     // setFilters(newFilters);
   };
+
+  const onMultiChange = (item) => {
+    const newMap = locationMap;
+    if (!newMap.has(item.id)) {
+      newMap.set(item.id, item.item);
+    } else {
+      newMap.delete(item.id);
+    }
+    const newArr = Array.from(newMap, ([key, value]) => ({
+      item: key,
+      id: value,
+    }));
+    setLocationMap(newMap);
+    setLocation(newArr);
+  };
+
   return (
     <View style={styles.container}>
       <SelectBox
@@ -37,7 +52,10 @@ const FilterPage = (props) => {
         inputPlaceholder="Category"
         options={categoryOptions}
         value={category}
-        onChange={() => {}}
+        onChange={(val) => {
+          console.log('category', val);
+          setCategory(val);
+        }}
         hideInputFilter={true}
         labelStyle={styles.label}
         containerStyle={styles.filterContainer}
@@ -50,7 +68,10 @@ const FilterPage = (props) => {
         inputPlaceholder="Job type"
         options={jobTypeOptions}
         value={jobType}
-        onChange={() => {}}
+        onChange={(val) => {
+          console.log('jobType', val);
+          setJobType(val);
+        }}
         hideInputFilter={true}
         labelStyle={styles.label}
         containerStyle={styles.filterContainer}
@@ -62,8 +83,12 @@ const FilterPage = (props) => {
         inputPlaceholder="Location"
         options={locationOptions}
         selectedValues={location}
-        onMultiSelect={() => {}}
-        onTapClose={() => {}}
+        onMultiSelect={(val) => {
+          onMultiChange(val);
+        }}
+        onTapClose={(val) => {
+          onMultiChange(val);
+        }}
         labelStyle={styles.label}
         containerStyle={styles.filterContainer}
         arrowIconColor={Colors.dark}
@@ -75,7 +100,10 @@ const FilterPage = (props) => {
         inputPlaceholder="Sort"
         options={dateOptions}
         value={sort}
-        onChange={() => {}}
+        onChange={(val) => {
+          console.log('sort', val);
+          setSort(val);
+        }}
         hideInputFilter={true}
         labelStyle={styles.label}
         containerStyle={styles.filterContainer}
@@ -108,7 +136,6 @@ const styles = StyleSheet.create({
   },
   label: {
     display: 'none',
-    color: Colors.primary,
   },
   optionContainer: {
     flex: 1,
