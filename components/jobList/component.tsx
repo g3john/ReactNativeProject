@@ -1,6 +1,13 @@
 import React, { forwardRef } from 'react';
-import { View, FlatList, ActivityIndicator, StyleSheet } from 'react-native';
+import {
+  View,
+  Text,
+  FlatList,
+  ActivityIndicator,
+  StyleSheet,
+} from 'react-native';
 import { Colors } from 'react-native/Libraries/NewAppScreen';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 import Job from '../job';
 
 const JobList = forwardRef((props, ref) => {
@@ -16,15 +23,15 @@ const JobList = forwardRef((props, ref) => {
     <Job job={item} navigation={navigation}></Job>
   );
   const footerComponent =
-    !isSaved && nonDisplayedJobs && nonDisplayedJobs.length ? (
+    !isSaved && nonDisplayedJobs && nonDisplayedJobs.length > 0 ? (
       <View style={styles.activityIndicator}>
         <ActivityIndicator size="large" color={Colors.primary} />
       </View>
     ) : null;
   const jobsToShow = isSaved ? savedJobs : jobs;
   return (
-    <View>
-      {jobsToShow && (
+    <View style={{ flex: 1 }}>
+      {jobsToShow && jobsToShow.length > 0 ? (
         <React.Fragment>
           <FlatList
             ref={ref}
@@ -38,6 +45,15 @@ const JobList = forwardRef((props, ref) => {
             ListFooterComponent={footerComponent}
           />
         </React.Fragment>
+      ) : (
+        <View style={styles.noJobsContainer}>
+          <Ionicons
+            name={'briefcase-outline'}
+            size={40}
+            color={Colors.primary}
+          />
+          <Text>No jobs found. Try expanding your filters</Text>
+        </View>
       )}
     </View>
   );
@@ -46,6 +62,11 @@ const JobList = forwardRef((props, ref) => {
 const styles = StyleSheet.create({
   activityIndicator: {
     padding: 10,
+  },
+  noJobsContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 });
 
