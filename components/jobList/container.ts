@@ -4,6 +4,7 @@ import JobList from './component';
 
 const mapStateToProps = (state) => ({
   jobs: state.root.filteredJobs,
+  nonDisplayedJobs: state.root.nonDisplayedJobs,
 });
 
 const mapDispatchToProps = {
