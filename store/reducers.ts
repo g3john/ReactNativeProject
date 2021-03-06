@@ -16,7 +16,7 @@ const initialState = {
   },
 };
 
-const filterJobs = (state, loadedJobs, filters) => {
+const filterJobs = (loadedJobs, filters) => {
   try {
     const { category, jobType, location, sort } = filters;
     const filteredJobs = loadedJobs.filter((job) => {
@@ -48,11 +48,7 @@ const filterJobs = (state, loadedJobs, filters) => {
 export default function (state = initialState, action) {
   switch (action.type) {
     case ACTIONS.LOAD_JOBS: {
-      const filteredJobs = filterJobs(
-        state,
-        action.payload.jobs,
-        state.filters,
-      );
+      const filteredJobs = filterJobs(action.payload.jobs, state.filters);
       return {
         ...state,
         loadedJobs: action.payload.jobs,
@@ -60,11 +56,7 @@ export default function (state = initialState, action) {
       };
     }
     case ACTIONS.SET_FILTERS: {
-      const filteredJobs = filterJobs(
-        state,
-        state.loadedJobs,
-        action.payload.filters,
-      );
+      const filteredJobs = filterJobs(state.loadedJobs, action.payload.filters);
       return {
         ...state,
         filters: action.payload.filters,
