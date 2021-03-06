@@ -12,7 +12,7 @@ const SavedPage = (props) => {
     <View style={containerStyle}>
       {jobs.length > 0 ? (
         <View>
-          <JobList ref={null} jobs={jobs} navigation={navigation} />
+          <JobList ref={null} isSaved={true} navigation={navigation} />
         </View>
       ) : (
         <View style={styles.container}>

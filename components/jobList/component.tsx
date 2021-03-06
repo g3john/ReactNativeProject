@@ -15,23 +15,31 @@ const testJob = {
 };
 
 const JobList = forwardRef((props, ref) => {
-  const { jobs, nonDisplayedJobs, displayMore, navigation } = props;
+  const {
+    jobs,
+    nonDisplayedJobs,
+    savedJobs,
+    displayMore,
+    isSaved,
+    navigation,
+  } = props;
   const renderItem = ({ item }) => (
     <Job job={item} navigation={navigation}></Job>
   );
   const footerComponent =
-    nonDisplayedJobs && nonDisplayedJobs.length ? (
+    !isSaved && nonDisplayedJobs && nonDisplayedJobs.length ? (
       <View style={styles.activityIndicator}>
         <ActivityIndicator size="large" color="#00ff00" />
       </View>
     ) : null;
+  const jobsToShow = isSaved ? savedJobs : jobs;
   return (
     <View>
-      {jobs && (
+      {jobsToShow && (
         <React.Fragment>
           <FlatList
             ref={ref}
-            data={jobs}
+            data={jobsToShow}
             keyExtractor={(item) => item.id.toString()}
             updateCellsBatchingPeriod={100}
             removeClippedSubviews={true}
