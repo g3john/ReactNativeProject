@@ -40,7 +40,6 @@ const filterJobs = (loadedJobs, filters, amountToDisplay) => {
       const more = newestFirst ? -1 : 1;
       return a.publicationDate < b.publicationDate ? less : more;
     });
-
     return {
       displayed: filteredJobs.slice(0, amountToDisplay),
       nonDisplayed: filteredJobs.slice(amountToDisplay),
@@ -94,7 +93,7 @@ export default function (state = initialState, action) {
         ...state,
         filters: action.payload.filters,
         filteredJobs: displayed,
-        nonDisplayed: nonDisplayed,
+        nonDisplayedJobs: nonDisplayed,
       };
     }
     case ACTIONS.SET_FILTER_OPTIONS: {

@@ -20,10 +20,6 @@ const JobSearchPage = (props) => {
     loadJobs,
     navigation,
   } = props;
-  const flatListRef = useRef(null);
-  DeviceEventEmitter.addListener('event.scrollToTop', () => {
-    flatListRef.current.scrollToIndex({ animated: true, index: 0 });
-  });
 
   useEffect(() => {
     setLoadingJobs(true);
@@ -50,7 +46,7 @@ const JobSearchPage = (props) => {
         </View>
       ) : (
         <View style={{ height: Dimensions.get('window').height * 0.8 }}>
-          <JobList ref={flatListRef} navigation={navigation} />
+          <JobList navigation={navigation} />
         </View>
       )}
 

@@ -12,6 +12,4 @@ const mapDispatchToProps = {
   displayMore,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps, null, {
-  forwardRef: true,
-})(JobList);
+export default connect(mapStateToProps, mapDispatchToProps)(JobList);

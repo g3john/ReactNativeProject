@@ -1,16 +1,17 @@
-import React, { forwardRef } from 'react';
+import React, { useRef, useEffect } from 'react';
 import {
   View,
   Text,
   FlatList,
   ActivityIndicator,
   StyleSheet,
+  DeviceEventEmitter,
 } from 'react-native';
 import { Colors } from 'react-native/Libraries/NewAppScreen';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import Job from '../job';
 
-const JobList = forwardRef((props, ref) => {
+const JobList = (props) => {
   const {
     jobs,
     nonDisplayedJobs,
@@ -19,6 +20,8 @@ const JobList = forwardRef((props, ref) => {
     isSaved,
     navigation,
   } = props;
+
+  const ref = useRef(null);
   const renderItem = ({ item }) => (
     <Job job={item} navigation={navigation}></Job>
   );
@@ -29,6 +32,18 @@ const JobList = forwardRef((props, ref) => {
       </View>
     ) : null;
   const jobsToShow = isSaved ? savedJobs : jobs;
+  useEffect(() => {
+    DeviceEventEmitter.addListener('event.scrollToTop', () => {
+      if (
+        ref !== null &&
+        ref.current !== null &&
+        typeof ref.current.scrollToIndex === 'function'
+      ) {
+        ref.current.scrollToIndex({ animated: true, index: 0 });
+      }
+    });
+  }, []);
+
   return (
     <View style={{ flex: 1 }}>
       {jobsToShow && jobsToShow.length > 0 ? (
@@ -57,7 +72,7 @@ const JobList = forwardRef((props, ref) => {
       )}
     </View>
   );
-});
+};
 
 const styles = StyleSheet.create({
   activityIndicator: {
